@@ -1,0 +1,22 @@
+/*
+Global styles for Scroll Space.
+Uses Tailwind CSS and Inter font for a pink-themed, responsive design.
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+.btn-pink {
+  @apply bg-pink-500 text-white px-4 py-2 rounded-lg hover:bg-pink-600 transition duration-300;
+}
+
+.card {
+  @apply bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300;
+}
