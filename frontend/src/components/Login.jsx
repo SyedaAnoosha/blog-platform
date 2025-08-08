@@ -19,19 +19,21 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`${import.meta.env.API_URL}/token/`, { username, password }, {
-        headers: { 'Content-Type': 'application/json' },
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/token/`, {
+        username,
+        password,
       });
       dispatch(setCredentials({
         access: response.data.access,
         refresh: response.data.refresh,
-        user: { username }
+        user: { username },
       }));
       setError('');
       navigate('/dashboard');
     } catch (err) {
       const errorMsg = err.response?.data?.detail || 'Login failed. Please check your credentials.';
       setError(errorMsg);
+      console.error('Login error:', err);
     }
   };
 

@@ -20,7 +20,7 @@ function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`${import.meta.env.API_URL}/register/`, { username, email, password }, {
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/register/`, { username, email, password }, {
         headers: { 'Content-Type': 'application/json' },
       });
       dispatch(setCredentials({

@@ -15,7 +15,7 @@ function Dashboard() {
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.API_URL}/blogs/`, {
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/blogs/`, {
           headers: { Authorization: `Bearer ${accessToken}` },
         });
         setBlogs(response.data);

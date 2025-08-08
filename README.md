@@ -78,7 +78,7 @@ A full-stack blog management platform with a pink-themed, responsive UI using Dj
 
 2. **Create `.env` file in `blog-frontend/`**:
    ```plaintext
-   API_URL=http://localhost:8000/api
+   VITE_API_URL=http://localhost:8000/api
    ```
 
 3. **Set up Tailwind CSS**:

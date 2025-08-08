@@ -3,7 +3,7 @@ BlogForm component for Scroll Space.
 Allows users to create or edit blog posts using a rich-text editor.
 */
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
@@ -17,12 +17,14 @@ function BlogForm() {
   const [error, setError] = useState('');
   const { accessToken } = useSelector((state) => state.auth);
   const navigate = useNavigate();
+  const quillRef = useRef(null);
+
 
   useEffect(() => {
     if (id) {
       const fetchBlog = async () => {
         try {
-          const response = await axios.get(`${import.meta.env.API_URL}/blogs/${id}/`, {
+          const response = await axios.get(`${import.meta.env.VITE_API_URL}/blogs/${id}/`, {
             headers: { Authorization: `Bearer ${accessToken}` },
           });
           setTitle(response.data.title);
@@ -35,16 +37,18 @@ function BlogForm() {
     }
   }, [id, accessToken]);
 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const data = { title, content };
+      const data = { title, content }; 
+
       if (id) {
-        await axios.put(`${import.meta.env.API_URL}/blogs/${id}/`, data, {
+        await axios.put(`${import.meta.env.VITE_API_URL}/blogs/${id}/`, data, {
           headers: { Authorization: `Bearer ${accessToken}` },
         });
       } else {
-        await axios.post(`${import.meta.env.API_URL}/blogs/`, data, {
+        await axios.post(`${import.meta.env.VITE_API_URL}/blogs/`, data, {
           headers: { Authorization: `Bearer ${accessToken}` },
         });
       }
@@ -72,7 +76,12 @@ function BlogForm() {
         </div>
         <div className="mb-4">
           <label className="block mb-2 text-gray-700">Content</label>
-          <ReactQuill value={content} onChange={setContent} className="h-64 bg-white" />
+          <ReactQuill
+            ref={quillRef}
+            value={content}
+            onChange={setContent}
+            className="h-64 bg-white"
+          />
         </div>
         <button type="submit" className="btn-pink mt-12">Save</button>
       </form>

@@ -20,7 +20,7 @@ function BlogDetail() {
   useEffect(() => {
     const fetchBlog = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.API_URL}/blogs/${id}/`, {
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/blogs/${id}/`, {
           headers: { Authorization: `Bearer ${accessToken}` },
         });
         setBlog(response.data);
@@ -31,7 +31,7 @@ function BlogDetail() {
 
     const fetchComments = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.API_URL}/comments/`, {
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/comments/`, {
           headers: { Authorization: `Bearer ${accessToken}` },
         });
         setComments(response.data.filter((c) => c.blog === parseInt(id)));
@@ -50,12 +50,12 @@ function BlogDetail() {
     e.preventDefault();
     try {
       await axios.post(
-        `${import.meta.env.API_URL}/comments/`,
+        `${import.meta.env.VITE_API_URL}/comments/`,
         { blog: id, content: commentContent },
         { headers: { Authorization: `Bearer ${accessToken}` } }
       );
       setCommentContent('');
-      const response = await axios.get(`${import.meta.env.API_URL}/comments/`, {
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/comments/`, {
         headers: { Authorization: `Bearer ${accessToken}` },
       });
       setComments(response.data.filter((c) => c.blog === parseInt(id)));
@@ -67,7 +67,7 @@ function BlogDetail() {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`${import.meta.env.API_URL}/blogs/${id}/`, {
+      await axios.delete(`${import.meta.env.VITE_API_URL}/blogs/${id}/`, {
         headers: { Authorization: `Bearer ${accessToken}` },
       });
       navigate('/dashboard');
